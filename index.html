@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Store</title>
+    <link rel="stylesheet" href="style.css"> 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+</head>
+<body>
+    <div class="navbar">
+        <h1>Simple Library</h1>
+        
+        <button id="login">Log in</button>
+    </div>
+    <div class="content">
+        <div id="Library">
+            <h2>Book Library</h2>
+            <form id="bookForm" action="/script.js" method="post">
+                <label for="book_name">Book Name</label>
+                <input type="text"
+                        class="book_name"
+                        autocomplete="book-name"
+                        placeholder="Book Name"
+                        required>
+                <label for="book_author">Book Author</label>
+                <input type="text"
+                        class="book_author"
+                        autocomplete="book-author"
+                        placeholder="Book Author"
+                        required>
+                <label for="book_page">Book pages</label>
+                <input type="int"
+                        class="book_page"
+                        autocomplete="book-page"
+                        placeholder="How many pages"
+                        required>
+                <input type="submit"
+                        class="submit-btn"
+                        value="Post Book">
+               
+            </form>
+            <button id="btnForm">Book Form</button>
+        </div>
+    </div>
+
+    <div class="List">
+        <ul class="bookList">
+            
+        </ul>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

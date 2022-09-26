@@ -1,0 +1,109 @@
+body{
+    margin: 0;
+    background-color: lightblue;
+}
+.navbar{
+    height: 40px;
+    border: 1px;
+    display: flex;
+    align-items: center;
+    background-color: cadetblue;
+}
+.navbar > h1 {
+margin-left: 20px;
+margin-right: auto;
+}
+.navbar > #login{
+    border-radius: 20px;
+    margin-right: 20px;
+}
+
+.content{
+    border: 1px;
+}
+#Library{
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    gap: 5px;
+}
+#bookForm {
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    width: 150px;
+    gap: 10px;
+}
+input{
+    text-align: center;
+}
+#btnForm{
+    margin: auto;
+}
+#Submit{
+    margin: auto;
+}
+input:focus{
+    outline: none !important;
+    border: 2px solid #5388b3;
+}
+input:invalid:not(:focus):not(:placeholder-shown) {
+    border: 2px solid #ee28ee;
+}
+
+.List {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.bookList{
+    min-width: 30%;
+    list-style: none;
+}
+.book{
+    margin: 0.5rem;
+    background: white;
+    color: black;
+    font-size: 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: all 0.4s ease;
+}
+
+.book li{
+    flex: 1;
+}
+.check-btn {
+    background: green;
+    color: white;
+    border: none;
+    padding: 1rem;
+    cursor: pointer;
+    font-size: 1rem;
+}
+.delete-btn {
+    background: red;
+    color: white;
+    border: none;
+    padding: 1rem;
+    cursor: pointer;
+    font-size: 1rem;
+}
+.list-book{
+    padding: 0rem 0.5rem;
+}
+.fa-xmark, .fa-check {
+    pointer-events: none;
+}
+.completed {
+    text-decoration: line-through;
+    opacity: 0.6;
+}
+
+.fall {
+    transform: translateY(8rem) rotateZ(20deg);
+    opacity: 0;
+}
