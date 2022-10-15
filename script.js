@@ -5,11 +5,11 @@ const bList = document.querySelector(".bookList")
 const bName = document.querySelector(".book_name");
 const bAuthor = document.querySelector(".book_author");
 const bPage = document.querySelector(".book_page");
+const bStatus = document.querySelector(".book_status");
 //input submit button
 const submitBtn = document.querySelector(".submit-btn");
 
 //Event Listener
-document.addEventListener('DOMContentLoaded', getBooks);
 bBtn.addEventListener('click', () =>{
     const form = document.getElementById('bookForm');
 
@@ -23,18 +23,39 @@ bBtn.addEventListener('click', () =>{
 submitBtn.addEventListener("click", addBookToLibrary);
 bList.addEventListener('click', deleteCheck);
 
+class Book {
+    constructor(bName, bAuthor, bPage){
+        this.bName = bName.value;
+        this.bAuthor = bAuthor.value;
+        this.bPage = bPage.value;
+    }
+}
+let myLibrary = [];
+let newBook;
 //Funtions
-function addBookToLibrary(event){
+function addBookToLibrary(){
 
-    event.preventDefault();
+    newBook = new Book(bName, bAuthor, bPage, bStatus);
+    myLibrary.push(newBook);
+    setData();
+    render();
+}
+
+function render() {
+    const display = document.getElementsByClassName('bookList');
+    const books = document.querySelectorAll('.book');
+    books.forEach(book => display.removeChild(book));
+
+    for (let i=0; myLibrary.length; i ++){
+        addBookToLibrary(myLibrary[i]);
+    }
+}
+
+function createBook(item){
 
     const bookDiv = document.createElement("div");
     bookDiv.classList.add("book");
-
-    const newBook = document.createElement('li');
-    newBook.innerText = 'Title: ' + bName.value + ' | Author: ' + bAuthor.value + ' | Pages: ' + bPage.value;
-    newBook.classList.add('list-book');
-    bookDiv.appendChild(newBook);
+    bookDiv.setAttribute('id', myLibrary.indexOf(item));
 
     const checkedButton = document.createElement('button');
     checkedButton.innerHTML = '<i class="fa-sharp fa-solid fa-check"></i>';
@@ -48,9 +69,6 @@ function addBookToLibrary(event){
 
     bList.appendChild(bookDiv);
 
-    bName.value = "";
-    bAuthor.value = "";
-    bPage.value = "";
 }
 
 function deleteCheck(e){
@@ -62,6 +80,9 @@ function deleteCheck(e){
         removeLocalBooks(bList);
         Blist.addEventListener('transitionend', function(){
             Blist.remove();
+            myLibrary.splice(myLibrary.indexOf(item),1);
+            setData();
+            render();
         });
     }
 
@@ -71,59 +92,18 @@ function deleteCheck(e){
     }
 }
 
-function saveLocalBook(bList) {
-    let books;
-
-    if(localStorage.getItem("books") === null){
-        books=[];
+function setData(){
+    localStorage.setItem(`myLibrary`, JSON.stringify(myLibrary));
+}
+function restore(){
+    if(!localStorage.myLibrary){
+        render();
     } else {
-        books = JSON.parse(localStorage.getItem("books"));
+        let objects = localStorage.getItem('myLibrary')
+        objects = JSON.parse(objects);
+        myLibrary = objects;
+        render();
     }
-    books.push(bList);
-    localStorage.setItem("books", JSON.stringify(books));
 }
 
-function getBooks(){
-    let books;
-
-    if(localStorage.getItem("books") === null){
-        books=[];
-    } else {
-        books = JSON.parse(localStorage.getItem("books"));
-    }
-
-    books.forEach(function(list){
-
-    const bookDiv = document.createElement("div");
-    bookDiv.classList.add("book");
-
-    const newBook = document.createElement('li');
-    newBook.innerText = list;
-    newBook.classList.add('list-book');
-    bookDiv.appendChild(newBook);
-
-    const checkedButton = document.createElement('button');
-    checkedButton.innerHTML = '<i class="fa-sharp fa-solid fa-check"></i>';
-    checkedButton.classList.add("check-btn");
-    bookDiv.appendChild(checkedButton);
-
-    const deleteBtn = document.createElement('button');
-    deleteBtn.innerHTML = '<i class="fa-solid fa-xmark"></i>';
-    deleteBtn.classList.add("delete-btn");
-    bookDiv.appendChild(deleteBtn);
-
-    bList.appendChild(bookDiv);
-    });
-}
-
-function removeLocalBooks(bList){
-    let books;
-
-    if(localStorage.getItem("books") === null){
-        books=[];
-    } else {
-        books = JSON.parse(localStorage.getItem("books"));
-    }
-    const bookIndex = bList.children[0].innerText;
-    books.splice(books.indexOf(bookIndex), 1);
-}
+restore();
