@@ -46,7 +46,7 @@ function render() {
     const books = document.querySelectorAll('.book');
     books.forEach(book => display.removeChild(book));
 
-    for (let i=0; myLibrary.length; i ++){
+    for (let i=0; myLibrary.length; i++){
         addBookToLibrary(myLibrary[i]);
     }
 }
