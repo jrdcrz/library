@@ -2,10 +2,6 @@
 const bBtn = document.getElementById('btnForm');
 const bList = document.querySelector(".bookList")
 //Selector for input
-const bName = document.querySelector(".book_name");
-const bAuthor = document.querySelector(".book_author");
-const bPage = document.querySelector(".book_page");
-const bStatus = document.querySelector(".book_status");
 //input submit button
 const submitBtn = document.querySelector(".submit-btn");
 
@@ -24,10 +20,10 @@ submitBtn.addEventListener("click", addBookToLibrary);
 bList.addEventListener('click', deleteCheck);
 
 class Book {
-    constructor(bName, bAuthor, bPage){
-        this.bName = bName.value;
-        this.bAuthor = bAuthor.value;
-        this.bPage = bPage.value;
+    constructor(book_name, book_author, book_page){
+        this.book_name = bookForm.book_name.value;
+        this.book_author = bookForm.book_author.value;
+        this.book_page = bookForm.book_page.value + 'pg';
     }
 }
 let myLibrary = [];
@@ -35,7 +31,7 @@ let newBook;
 //Funtions
 function addBookToLibrary(){
 
-    newBook = new Book(bName, bAuthor, bPage, bStatus);
+    newBook = new Book(book_name, book_author, book_page);
     myLibrary.push(newBook);
     setData();
     render();
@@ -56,6 +52,21 @@ function createBook(item){
     const bookDiv = document.createElement("div");
     bookDiv.classList.add("book");
     bookDiv.setAttribute('id', myLibrary.indexOf(item));
+    
+    const bookName = document.createElement("div");
+    bookName.textContent = item.book_name;
+    bookName.setAttribute("id", "bookName");
+    bookDiv.appendChild(bookName);
+    
+    const bookAuthor = document.createElement("div");
+    bookAuthor.textContent = item.book_author;
+    bookAuthor.setAttribute("id", "bookAuthor");
+    bookDiv.appendChild(bookAuthor);
+    
+    const bookPage = document.createElement("div");
+    bookAuthor.textContent = item.book_page;
+    bookAuthor.setAttribute("id", "bookAuthor");
+    bookDiv.appendChild(bookPage);
 
     const checkedButton = document.createElement('button');
     checkedButton.innerHTML = '<i class="fa-sharp fa-solid fa-check"></i>';
