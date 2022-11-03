@@ -35,6 +35,7 @@ function addBookToLibrary(e){
     myLibrary.push(newBook);
     setData();
     render();
+    bookForm.reset();
 }
 
 function render() {
@@ -43,7 +44,7 @@ function render() {
     books.forEach(book => display.removeChild(book));
 
     for (let i=0; myLibrary.length; i++){
-        addBookToLibrary(myLibrary[i]);
+        createBook(myLibrary[i]);
     }
 }
 
