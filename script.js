@@ -29,8 +29,8 @@ class Book {
 let myLibrary = [];
 let newBook;
 //Funtions
-function addBookToLibrary(){
-
+function addBookToLibrary(e){
+    e.preventDefault();
     newBook = new Book(book_name, book_author, book_page);
     myLibrary.push(newBook);
     setData();
